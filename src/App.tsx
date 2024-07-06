@@ -3,6 +3,7 @@ import CarList from './components/CarList';
 import CarMap from './components/CarMap';
 import { fetchCars } from './services/api';
 import { Car } from './types/Car';
+import { Container } from 'react-bootstrap';
 
 const App: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
@@ -16,11 +17,11 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Car Dashboard</h1>
+    <Container>
+      <h1 className="my-4">Car Dashboard</h1>
       <CarList />
       <CarMap cars={cars} />
-    </div>
+    </Container>
   );
 };
 

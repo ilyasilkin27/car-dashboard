@@ -1,5 +1,6 @@
 import React from 'react';
 import { Car } from '../types/Car';
+import { Card, Button } from 'react-bootstrap';
 
 interface CarCardProps {
   car: Car;
@@ -9,13 +10,17 @@ interface CarCardProps {
 
 const CarCard: React.FC<CarCardProps> = ({ car, onEdit, onDelete }) => {
   return (
-    <div className="car-card">
-      <h2>{car.name} {car.model}</h2>
-      <p>Year: {car.year}</p>
-      <p>Price: ${car.price}</p>
-      <button onClick={() => onEdit(car)}>Edit</button>
-      <button onClick={() => onDelete(car.id)}>Delete</button>
-    </div>
+    <Card className="mb-3">
+      <Card.Body>
+        <Card.Title>{car.name} {car.model}</Card.Title>
+        <Card.Text>
+          Year: {car.year} <br />
+          Price: ${car.price}
+        </Card.Text>
+        <Button variant="primary" onClick={() => onEdit(car)}>Edit</Button>
+        <Button className='mx-1' variant="danger" onClick={() => onDelete(car.id)}>Delete</Button>
+      </Card.Body>
+    </Card>
   );
 };
 

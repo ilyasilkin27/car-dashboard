@@ -3,6 +3,7 @@ import { fetchCars } from '../services/api';
 import { Car } from '../types/Car';
 import CarCard from './CarCard';
 import EditCarModal from './EditCarModal';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 
 const CarList: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
@@ -35,18 +36,22 @@ const CarList: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="sort-buttons">
-        <button onClick={() => handleSort('year')}>Sort by Year</button>
-        <button onClick={() => handleSort('price')}>Sort by Price</button>
-      </div>
-      <div className="car-list">
+    <Container>
+      <Row className="mb-3">
+        <Col>
+          <Button variant="secondary" onClick={() => handleSort('year')}>Sort by Year</Button>
+          <Button className='mx-2' variant="secondary" onClick={() => handleSort('price')}>Sort by Price</Button>
+        </Col>
+      </Row>
+      <Row>
         {cars.map(car => (
-          <CarCard key={car.id} car={car} onEdit={handleEdit} onDelete={handleDelete} />
+          <Col key={car.id} md={4}>
+            <CarCard car={car} onEdit={handleEdit} onDelete={handleDelete} />
+          </Col>
         ))}
-      </div>
+      </Row>
       {editCar && <EditCarModal car={editCar} onSave={handleSave} onCancel={() => setEditCar(null)} />}
-    </div>
+    </Container>
   );
 };
 
